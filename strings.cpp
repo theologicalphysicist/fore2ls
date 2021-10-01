@@ -1,4 +1,11 @@
 // File for printing char* arrays, and converting between char* arrays and strings
+// #include <stdio.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
 char *split(char *str, int start, int len) {
 
 	char *str_ptr = (char *) calloc(0, sizeof(char));
