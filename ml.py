@@ -2,11 +2,54 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def LinearRegression(data):
+def DotProduct(v1:list, v2:list)\
+	-> float:
 
+	ans = 0
+	for i in range(0, len(v1)):
+		ans += v1[i] * v2[i]
+	
+	return ans
+
+def LinearRegression(X:list, Y:list, calc:str = "BGD", alpha:float = 0.01, batch_size:int = 10)\
+	-> list():
+	#TODO - INSERT DOCSTRINGS WITH OPTIONS FOR CALCULATIONS
+
+	calc_options = [["SGD", "STOCHASTIC", "S", "STOCHASTIC GRADIENT DESCENT"], ["MINI-BATCH", "MB", "MINI-BATCH GRADIENT DESCENT", "MBGD", "M-BGD"]]
+
+	if (calc.upper() in calc_options[0]):
+		return SGD(X, Y)
+	elif (calc.upper() in calc_options[1]):
+		return MBGD(X, Y, alpha, batch_size)
+	else:
+		return BGD(X, Y, alpha)
+
+def BGD(X:list, Y:list, alpha:float = 0.01):
+
+	theta:list = [1] * len(X[0])
+
+	for j in range(0, len(X[0])):
+		theta_adj = theta
+		for i in range(0, len(X[0])):
+			_hyp = DotProduct(X[i], theta)
+			theta_adj[i] = (_hyp - Y[i]) * X[i][j]
+		theta[j] -= alpha * theta_adj[j]
+
+	return theta
+
+def SGD(X:list, Y:list):
+
+	#TODO - Stochastic Gradient Descent
+	
 	return 0
 
-def LinearRegression(X, Y):
+def MBGD(X:list, Y:list, alpha:float, b_s:int):
+
+	#TODO - Mini-batch Gradient Descent
+
+	return 0
+	
+def LinearRegressionSimple(X, Y):
 
 	#_ Calculate means
 	x_len = len(X)
@@ -33,4 +76,4 @@ def LinearRegression(X, Y):
 
 	intercept = [y_mean - (b[0] * x_mean), y_mean - (b[1] * x_mean)]
 
-    return b, intercept
+	return (b, intercept)
