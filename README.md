@@ -4,9 +4,9 @@ A personal library:
   - ml/dl algorithms
   - numerical computation
   - sorting/searching algorithms
-  - 
 - internal tools 
   - string manipulation
   - custom logger formats
   - error messages
+  - bash scripts
 for reference & later use
