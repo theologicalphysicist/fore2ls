@@ -8,5 +8,5 @@ A personal library:
   - string manipulation
   - custom logger formats
   - error messages
-  - bash scripts
+  - bash scripts 
 for reference & later use
