@@ -1,0 +1,8 @@
+.vscode
+
+#_ NODE
+**/*/node_modules
+
+#_ PYTHON ENVIRONMENTS
+**/*/env/
+**/*/.python-version

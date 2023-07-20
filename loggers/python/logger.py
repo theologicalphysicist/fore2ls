@@ -1,11 +1,8 @@
-import logging, pprint
-from decouple import config
-
-from stackapi import StackAPI
-import github
+import logging, pprint, json
+from datetime import datetime, date
 
 #_ CUSTOM LOGGER
-LOGGING_COLORS = {
+LOGGING_COLORS: dict = {
     "red": {
         "foreground": "\033[91m",
         "background": "\033[101m" 
@@ -27,14 +24,28 @@ LOGGING_COLORS = {
         "background": "\033[106m"
     },
 }
-LOG_RESET = "\033[0m"
+LOGGING_EDITORS: dict = {
+    "reset": "\033[0m",
+    "bold": "\033[1m",
+    "faint": "\033[2m",
+    "italic": "\033[3m",
+    "underline": "\033[4m",
+}
+
+def getStrFormat(colors: dict):
+
+    return (
+        colors["background"] + " {levelname} " + LOGGING_EDITORS["reset"] + 
+        ":" + 
+        colors["foreground"] + 
+        LOGGING_EDITORS["bold"] + "{name}" + LOGGING_EDITORS["reset"] + 
+        colors["foreground"] + 
+        " - {message} " + 
+        LOGGING_EDITORS["reset"] + "({filename}:{lineno})" +
+        LOGGING_EDITORS["reset"]
+    )
 
 class LoggingFormatter(logging.Formatter):
-
-
-    def getStrFormat(colors):
-
-        return colors["background"] + " {levelname} " + LOG_RESET + ":" + colors["foreground"] + "{name} - {message} ({filename}:{lineno})" + LOG_RESET
 
     FORMATS = {
         logging.DEBUG: getStrFormat(LOGGING_COLORS["cyan"]),
@@ -53,7 +64,8 @@ CUSTOM_LOGGER = logging.StreamHandler()
 CUSTOM_LOGGER.setLevel(logging.DEBUG)
 CUSTOM_LOGGER.setFormatter(LoggingFormatter())
 
-def getLogger(name):
+#* initialise a new logger with this function
+def getLogger(name: str):
 
     logger = logging.getLogger(name)
 
@@ -62,13 +74,10 @@ def getLogger(name):
 
     return logger
 
-PP = lambda msg : f"\n{(pprint.PrettyPrinter()).pformat(msg)}\n"
+def DefaultJSONSeralizer(obj): 
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    raise TypeError(f"type {type(obj)} is not (yet) serializable. report to file owner.")
 
-#_ API CLIENTS
-SO_API = StackAPI("stackoverflow", version="2.3")
-SO_API.page_size = 10
-SO_API.max_pages = 1
-
-# github.enable_console_debug_logging()
-GH_API = lambda username : github.Github().get_user(username)
-GH_API_URL = "https://api.github.com/"
+#* import this for pretty printing JSON
+printJSON = lambda msg : f"\n{json.dumps(msg, indent=4, default=DefaultJSONSeralizer)}\n"
