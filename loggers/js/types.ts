@@ -1,0 +1,1 @@
+export type LogData = string | Record<any, any> | object;
