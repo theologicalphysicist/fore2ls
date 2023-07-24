@@ -1,9 +1,10 @@
 import json
-
 from yachalk import chalk
 
+#_ LOCAL
+from classes.models import RequestTokens, ResponseTokens
 
-#_ CUSTOM LOGGER
+
 class Verbal:
     def __init__(self, name: str = "verbal") -> None:
         self.name : str = name
@@ -72,22 +73,23 @@ class Verbal:
             f"{OUT}" + "\n"
         )
     
-    def request_log(self, tokens) -> None:
-        QUERY = json.dumps(tokens['query'], indent=2)
-        BODY = json.dumps(tokens['body'], indent=2)
-        PARAMS = json.dumps(tokens['params'], indent=2)
+    def request_log(self, tokens: RequestTokens) -> None:
+        QUERY = json.dumps(tokens.query, indent=2)
+        BODY = json.dumps(tokens.body, indent=2)
+        PARAMS = json.dumps(tokens.params, indent=2)
 
         return print(
             "\n" + f"{chalk.bg_hex(self.serverColors['request']).hex('#000').bold(' REQUEST ')}" + "\n" +
-            f"{chalk.bold(tokens['method'])} {chalk.underline(tokens['path'])}, date:{chalk.italic(tokens['date'])}" + "\n" +
+            f"{chalk.bold(tokens.method)} {chalk.underline(tokens.path)}, date:{chalk.italic(tokens.date)}" + "\n" +
             f"query: {chalk.hex(self.serverColors['request'])(QUERY)}" + "\n" +
             f"body: {chalk.hex(self.serverColors['request'])(BODY)}" + "\n" +
             f"params: {chalk.hex(self.serverColors['request'])(PARAMS)}" + "\n"
         )
     
-    def response_log(self, tokens) -> None:
+    def response_log(self, tokens: ResponseTokens) -> None:
 
         return print(
             "\n" + f"{chalk.bg_hex(self.serverColors['response']).hex('#000').bold(' RESPONSE ')}" + "\n" +
-            f"status:{chalk.hex(self.serverColors['response']).bold(tokens['status'])}, content length:{chalk.underline(tokens['length'])}, response time:{chalk.bold(str(tokens['responseTime']) + 'ms')}" + "\n"
+            f"status:{chalk.hex(self.serverColors['response']).bold(tokens.status)}, content length:{chalk.underline(tokens.length)}, response time:{chalk.bold(str(tokens.responseTime) + 'ms')}" + "\n"
         )
+

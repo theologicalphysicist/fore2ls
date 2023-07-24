@@ -5,6 +5,9 @@
 #_ NODE
 **/*/node_modules
 
+#_ PYTHON
+**/*/__pycache__
+
 #_ PYTHON ENVIRONMENTS
 **/*/env/
 **/*/.python-version
