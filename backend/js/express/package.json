@@ -1,0 +1,51 @@
+{
+  "name": "express-template",
+  "version": "1.0.0",
+  "description": "template express backend",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "nodemon -x ts-node -r dotenv/config --esm ./index.ts dotenv_config_path=./.env.local dotenv_config_debug=true",
+    "build": "tsc --esm",
+    "dev": "cd dist/ && node -r dotenv/config --esm ./index.js dotenv_config_path=./.env.development dotenv_config_debug=true",
+    "prod": "cd dist/ && node -r dotenv/config --esm ./index.ts dotenv_config_path=./.env.production dotenv_config_debug=true"
+  },
+  "keywords": [
+    "backend",
+    "express",
+    "node.js"
+  ],
+  "author": "theologicalphysicist",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theologicalphysicist/fore2ls.git#main"
+  },
+  "bugs": {
+    "url": "https://github.com/theologicalphysicist/fore2ls/issues"
+  },
+  "homepage": "https://github.com/theologicalphysicist/fore2ls/tree/main#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "chalk": "^5.3.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/chalk": "^2.2.0",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/express-session": "^1.17.7",
+    "@types/morgan": "^1.9.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

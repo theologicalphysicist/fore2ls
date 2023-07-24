@@ -1,0 +1,43 @@
+{
+  "name": "koa-template",
+  "version": "1.0.0",
+  "description": "template koa backend",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "nodemon -x ts-node -r dotenv/config --esm ./index.ts dotenv_config_path=./.env.local dotenv_config_debug=true",
+    "build": "tsc --esm",
+    "dev": "cd dist/ && node -r dotenv/config --esm ./index.js dotenv_config_path=./.env.development dotenv_config_debug=true",
+    "prod": "cd dist/ && node -r dotenv/config --esm ./index.ts dotenv_config_path=./.env.production dotenv_config_debug=true"
+  },
+  "author": "theologicalphysicist",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theologicalphysicist/fore2ls.git#main"
+  },
+  "bugs": {
+    "url": "https://github.com/theologicalphysicist/fore2ls/issues"
+  },
+  "homepage": "https://github.com/theologicalphysicist/fore2ls/tree/main#readme",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/bodyparser": "^5.0.0",
+    "@koa/cors": "^4.0.0",
+    "@types/koa-static": "^4.0.2",
+    "axios": "^1.4.0",
+    "chalk": "^5.3.0",
+    "dotenv": "^16.3.1",
+    "koa": "^2.14.2",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.6",
+    "@types/koa__cors": "^4.0.0",
+    "@types/koa-router": "^7.4.4",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

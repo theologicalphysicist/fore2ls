@@ -1,5 +1,7 @@
 .vscode
 
+**/*/.env*
+
 #_ NODE
 **/*/node_modules
 
