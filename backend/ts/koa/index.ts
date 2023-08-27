@@ -38,16 +38,16 @@ APP.use(async (ctx: Koa.Context, next: Koa.Next) => {//* custom logger
     RequestLog(REQUEST_TOKENS);
 
     await next().then(() => {
-            const END = new Date().getTime();
-            const RESPONSE_TOKENS: ResponseTokens = {
-                status: ctx.response.status,
-                length: ctx.response.length,
-                responseTime: END - START
-            };
+        const END = new Date().getTime();
+        const RESPONSE_TOKENS: ResponseTokens = {
+            status: ctx.response.status,
+            length: ctx.response.length,
+            responseTime: END - START
+        };
 
-            ResponseLog(RESPONSE_TOKENS);
+        ResponseLog(RESPONSE_TOKENS);
 
-        });
+    });
 });
 
 

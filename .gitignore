@@ -10,4 +10,9 @@
 
 #_ PYTHON ENVIRONMENTS
 **/*/env/
+**/*/.venv/
 **/*/.python-version
+
+#_ SCRIPTS
+**/*/*.sh
+**/*/*.bat

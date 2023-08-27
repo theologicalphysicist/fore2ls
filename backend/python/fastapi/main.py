@@ -32,7 +32,7 @@ async def request_logging(req: Request, call_next):
         body=dict(await req.json()),
         params=req.path_params
     )
-    APP_LOGGER.request_log(REQUEST_TOKENS)
+    APP_LOGGER.request(REQUEST_TOKENS)
 
     #* response log
     START = time.time()
@@ -42,7 +42,7 @@ async def request_logging(req: Request, call_next):
         length=len(json.dumps(RES)),
         responseTime=round((time.time() - START) * 1000, None)
     )
-    APP_LOGGER.response_log(RESPONSE_TOKENS)
+    APP_LOGGER.response(RESPONSE_TOKENS)
 
     return JSONResponse(
         RES,
@@ -56,7 +56,9 @@ async def request_logging(req: Request, call_next):
 def home(req: Request):
 
     return {
-        "body": "hello world!",
+        "body": {
+            "no": "aether"
+        },
         "status": 200,
     }
 

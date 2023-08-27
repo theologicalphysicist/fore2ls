@@ -5,8 +5,7 @@ from yachalk import chalk
 
 #_ CUSTOM LOGGER
 class Verbal:
-
-
+    #_ CONSTRUCTORS
     def __init__(self, framework: str = None, name: str = "verbal") -> None:
         self.framework: str = framework
         self.name : str = name
@@ -35,6 +34,7 @@ class Verbal:
         return f"Verbal Logger called: {self.name}"
     
     
+    #_ GENERAL LOGGING
     def info(self, data) -> None:
         OUT = data if type(data) == str else json.dumps(data, indent=2)
 
@@ -45,6 +45,7 @@ class Verbal:
             f"{OUT}" + "\n"
         )
     
+
     def debug(self, data) -> None:
         OUT = data if type(data) == str else json.dumps(data, indent=2)
 
@@ -55,6 +56,7 @@ class Verbal:
             f"{OUT}" + "\n"
         )
     
+
     def warning(self, data) -> None:
         OUT = data if type(data) == str else json.dumps(data, indent=2)
 
@@ -77,12 +79,21 @@ class Verbal:
         )
     
 
+    #_ BACKEND LOGGING
     def request(self, tokens) -> None:
+        """
+            print out request details when request is received at server.
+
+            NOTE: self.framework must be defined, otherwise nothing will be printed.
+
+            PARAMS: 
+                tokens (any) - object containing data to be printed. will vary by framework.
+        """
         QUERY = json.dumps(tokens.query, indent=2)
         BODY = json.dumps(tokens.body, indent=2)
         PARAMS = json.dumps(tokens.params, indent=2)
 
-        if (self.framework == "fastapi"):
+        if (self.framework == "fastapi"): #TODO: Create ENUM for possible frameworks (i.e., lambda vs fastapi)
             return print(
                 "\n" + f"{chalk.bg_hex(self.serverColors['request']).hex('#000').bold(' REQUEST ')}" + "\n" +
                 f"{chalk.bold(tokens.method)} {chalk.underline(tokens.path)}, date:{chalk.italic(tokens.date)}" + "\n" +
@@ -90,7 +101,12 @@ class Verbal:
                 f"body: {chalk.hex(self.serverColors['request'])(BODY)}" + "\n" +
                 f"params: {chalk.hex(self.serverColors['request'])(PARAMS)}" + "\n"
             )
+        elif (self.framework == "lambda"):
+            return print(
+                "\n"
+            )
     
+
     def response(self, tokens) -> None:
 
         if (self.framework == "fastapi"):

@@ -6,7 +6,8 @@ from classes.models import RequestTokens, ResponseTokens
 
 
 class Verbal:
-    def __init__(self, name: str = "verbal") -> None:
+    def __init__(self, framework: str = None, name: str = "verbal") -> None:
+        self.framework: str = framework
         self.name : str = name
         self.colors: dict = {
             "red": "#E88388",
@@ -32,6 +33,7 @@ class Verbal:
     def __str__(self) -> str:
         return f"Verbal Logger called: {self.name}"
     
+
     def info(self, data) -> None:
         OUT = data if type(data) == str else json.dumps(data, indent=2)
 
@@ -73,23 +75,26 @@ class Verbal:
             f"{OUT}" + "\n"
         )
     
-    def request_log(self, tokens: RequestTokens) -> None:
+
+    def request(self, tokens: RequestTokens) -> None:
         QUERY = json.dumps(tokens.query, indent=2)
         BODY = json.dumps(tokens.body, indent=2)
         PARAMS = json.dumps(tokens.params, indent=2)
 
-        return print(
-            "\n" + f"{chalk.bg_hex(self.serverColors['request']).hex('#000').bold(' REQUEST ')}" + "\n" +
-            f"{chalk.bold(tokens.method)} {chalk.underline(tokens.path)}, date:{chalk.italic(tokens.date)}" + "\n" +
-            f"query: {chalk.hex(self.serverColors['request'])(QUERY)}" + "\n" +
-            f"body: {chalk.hex(self.serverColors['request'])(BODY)}" + "\n" +
-            f"params: {chalk.hex(self.serverColors['request'])(PARAMS)}" + "\n"
-        )
+        if (self.framework == "fastapi"):
+            return print(
+                "\n" + f"{chalk.bg_hex(self.serverColors['request']).hex('#000').bold(' REQUEST ')}" + "\n" +
+                f"{chalk.bold(tokens.method)} {chalk.underline(tokens.path)}, date:{chalk.italic(tokens.date)}" + "\n" +
+                f"query: {chalk.hex(self.serverColors['request'])(QUERY)}" + "\n" +
+                f"body: {chalk.hex(self.serverColors['request'])(BODY)}" + "\n" +
+                f"params: {chalk.hex(self.serverColors['request'])(PARAMS)}" + "\n"
+            )
     
-    def response_log(self, tokens: ResponseTokens) -> None:
+    def response(self, tokens: ResponseTokens) -> None:
 
-        return print(
-            "\n" + f"{chalk.bg_hex(self.serverColors['response']).hex('#000').bold(' RESPONSE ')}" + "\n" +
-            f"status:{chalk.hex(self.serverColors['response']).bold(tokens.status)}, content length:{chalk.underline(tokens.length)}, response time:{chalk.bold(str(tokens.responseTime) + 'ms')}" + "\n"
-        )
+        if (self.framework == "fastapi"):
+            return print(
+                "\n" + f"{chalk.bg_hex(self.serverColors['response']).hex('#000').bold(' RESPONSE ')}" + "\n" +
+                f"status:{chalk.hex(self.serverColors['response']).bold(tokens.status)}, content length:{chalk.underline(tokens.length)}, response time:{chalk.bold(str(tokens.responseTime) + 'ms')}" + "\n"
+            )
 
