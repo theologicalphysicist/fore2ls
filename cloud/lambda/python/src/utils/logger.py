@@ -36,7 +36,7 @@ class Verbal:
     
     #_ GENERAL LOGGING
     def info(self, data) -> None:
-        OUT = data if type(data) == str else json.dumps(data, indent=2)
+        OUT = data if isinstance(data, str) else json.dumps(data, indent=2)
 
         return print(
             "\n" + f"{chalk.bg_hex(self.colors['blue']).hex('#000').bold(' INFO ')}" +
@@ -47,7 +47,7 @@ class Verbal:
     
 
     def debug(self, data) -> None:
-        OUT = data if type(data) == str else json.dumps(data, indent=2)
+        OUT = data if isinstance(data, str) else json.dumps(data, indent=2)
 
         return print(
             "\n" + f"{chalk.bg_hex(self.colors['yellow']).hex('#000').bold(' WARNING ')}" +
@@ -58,7 +58,7 @@ class Verbal:
     
 
     def warning(self, data) -> None:
-        OUT = data if type(data) == str else json.dumps(data, indent=2)
+        OUT = data if isinstance(data, str)else json.dumps(data, indent=2)
 
         return print(
             "\n" + f"{chalk.bg_hex(self.colors['orange']).hex('#000').bold(' ORANGE ')}" +
@@ -69,7 +69,7 @@ class Verbal:
     
     def error(self, data) -> None:
 
-        OUT = data if type(data) == str else json.dumps(data, indent=2)
+        OUT = data if isinstance(data, str) else json.dumps(data, indent=2)
 
         return print(
             "\n" + f"{chalk.bg_hex(self.colors['red']).hex('#000').bold(' ERROR ')}" +
