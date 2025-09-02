@@ -36,14 +36,15 @@ class Verbal:
     
     #_ GENERAL LOGGING
     def info(self, data) -> None:
-        OUT = data if isinstance(data, str) else json.dumps(data, indent=2)
+        OUT = {
+            "level": "INFO",
+            "message": data 
+        }
 
-        return print(
-            "\n" + f"{chalk.bg_hex(self.colors['blue']).hex('#000').bold(' INFO ')}" +
-            " - " +
-            f"{chalk.hex(self.colors['blue']).underline(self.name)}" + ": " +
-            f"{OUT}" + "\n"
-        )
+        return print(json.dumps({
+            "level": "INFO",
+            "message": data 
+        }))
     
 
     def debug(self, data) -> None:

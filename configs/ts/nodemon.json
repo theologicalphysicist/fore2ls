@@ -1,0 +1,20 @@
+{
+    "restartable": "rs",
+    "colours": true,
+    "execMap": {
+        "py": "python",
+        "rb": "ruby",
+        "ts": "ts-node",
+        "js": "node"
+    },
+    "ignoreRoot": "",
+    "watch": [
+        "*.*"
+    ],
+    "stdin": true,
+    "runOnChangeOnly": false,
+    "verbose": false,
+    "signal": "SIGUSR2",
+    "stdout": true,
+    "watchOptions": {}
+}
